@@ -7,6 +7,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by hayi on 11/01/18.
@@ -22,6 +23,6 @@ public interface GitAPI {
     @GET("positions/{id}.json")
     Call<Job> getJob(@Path("id") String idJob);
 
-    @GET("positions.json?description=python&location=sf&full_time=true")
-    Call<List<Job>> getJobs();
+    @GET("positions.json?search={query}")
+    Call<List<Job>> getJobs(@Query("search") String query);
 }

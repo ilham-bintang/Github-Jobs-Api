@@ -5,6 +5,7 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -52,7 +53,7 @@ public class ItemActivity extends AppCompatActivity {
                 created_at.setText(job.getCreatedAt());
                 location.setText(job.getLocation());
                 type.setText(job.getType());
-                description.setText(job.getDescription());
+                description.setText(Html.fromHtml(job.getDescription()));
                 company.setText(job.getCompany());
 
                 Glide.with(ItemActivity.this).load(job.getCompanyLogo()).into(thumbnail);

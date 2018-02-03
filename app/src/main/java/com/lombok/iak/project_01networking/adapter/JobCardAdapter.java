@@ -41,7 +41,6 @@ public class JobCardAdapter extends RecyclerView.Adapter<JobCardAdapter.MyViewHo
             created_at = itemView.findViewById(R.id.created_at);
 
             thumbnail = itemView.findViewById(R.id.thumbnail);
-            overflow = itemView.findViewById(R.id.overflow);
         }
     }
 
@@ -62,17 +61,12 @@ public class JobCardAdapter extends RecyclerView.Adapter<JobCardAdapter.MyViewHo
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         final Job job = jobList.get(position);
 
-        holder.title.setText(job.getTitle());
+        if(job.getTitle().length() > 20)
+            holder.title.setText(job.getTitle().substring(0,16) + " ...");;
+
         holder.created_at.setText(job.getCreatedAt());
 
         Glide.with(mContext).load(job.getCompanyLogo()).into(holder.thumbnail);
-
-        holder.overflow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showPopupMenu(holder.overflow);
-            }
-        });
 
         holder.thumbnail.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,32 +76,6 @@ public class JobCardAdapter extends RecyclerView.Adapter<JobCardAdapter.MyViewHo
                 mContext.startActivity(i);
             }
         });
-    }
-
-    private void showPopupMenu(View view) {
-        PopupMenu popup = new PopupMenu(mContext, view);
-        MenuInflater inflater =  popup.getMenuInflater();
-        inflater.inflate(R.menu.menu_job,popup.getMenu());
-        popup.setOnMenuItemClickListener(new MyMenuOnclickListener());
-    }
-
-    class MyMenuOnclickListener implements PopupMenu.OnMenuItemClickListener {
-
-        public MyMenuOnclickListener() {
-        }
-
-        @Override
-        public boolean onMenuItemClick(MenuItem menuItem) {
-            switch (menuItem.getItemId()) {
-                case R.id.apply:
-                    Toast.makeText(mContext, "Apply!", Toast.LENGTH_SHORT).show();
-                    return true;
-                case R.id.save_to_favorite :
-                    Toast.makeText(mContext, "Saved to favorites!", Toast.LENGTH_SHORT).show();
-                    return true;
-            }
-            return false;
-        }
     }
 
     @Override

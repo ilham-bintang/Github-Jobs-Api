@@ -46,7 +46,7 @@ public class Repository {
     }
 
     public void getJobs(Callback<List<Job>> callback) {
-        Call<List<Job>> apiCall = getApiClient().getJobs();
+        Call<List<Job>> apiCall = getApiClient().getJobs("android");
         apiCall.enqueue(callback);
     }
 

@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
                 jobList = response.body();
                 Log.e("Tag " , jobList.get(0).getTitle());
+
                 adapter = new JobCardAdapter(MainActivity.this,jobList);
 
                 RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(MainActivity.this,2);
